@@ -63,7 +63,6 @@ function totalPrice() {
 //Calcualting and updating the discounted price by this
 function applyPromo(price) {
     const discountedPrice = price - (price * .20);
-    updatePrice('total-price', discountedPrice);
     updatePrice('again-total-price', discountedPrice);
 }
 
