@@ -1,62 +1,79 @@
+document.getElementById('additional-purchase').addEventListener('click', function (event) {
 
-//ram
+    //getting all the value
+    const ram8GB = document.getElementById('ram-8gb').innerText;
+    const ram16GB = document.getElementById('ram-16gb').innerText;
+    const hdd256GB = document.getElementById('hdd-256').innerText;
+    const hdd512GB = document.getElementById('hdd-512').innerText;
+    const hdd1TB = document.getElementById('hdd-1TB').innerText;
+    const regularDelivery = document.getElementById('regular-delivery').innerText;
+    const fastDelivery = document.getElementById('fast-delivery').innerText;
 
-document.getElementById('ram-16gb').addEventListener('click', function () {
+    const ev = event.target.innerText;
 
-    document.getElementById('extra-memory').innerText = 180;
+    //updating the price according to event
+    if (ev == ram8GB)
+        updatePrice('extra-memory', 0);
+    else if (ev == ram16GB)
+        updatePrice('extra-memory', 180);
+    else if (ev == hdd256GB)
+        updatePrice('extra-storage', 0);
+    else if (ev == hdd512GB)
+        updatePrice('extra-storage', 100);
+    else if (ev == hdd1TB)
+        updatePrice('extra-storage', 180);
+    else if (ev == regularDelivery)
+        updatePrice('delivery-charge', 0);
+    else if (ev == fastDelivery)
+        updatePrice('delivery-charge', 20);
 
-})
-
-document.getElementById('ram-8gb').addEventListener('click', function () {
-
-
-    document.getElementById('extra-memory').innerText = 0
-
-})
-
-
-//hdd
-
-document.getElementById('hdd-256').addEventListener('click', function () {
-
-
-    document.getElementById('extra-storage').innerText = 0;
-
-})
-
-document.getElementById('hdd-512').addEventListener('click', function () {
-
-
-    document.getElementById('extra-storage').innerText = 100;
-
-})
-
-document.getElementById('hdd-1TB').addEventListener('click', function () {
-
-
-    document.getElementById('extra-storage').innerText = 180;
-
+    //Calling fucntion to get total price
+    totalPrice();
 })
 
 
+//update price by this 
+function updatePrice(input, price) {
+    document.getElementById(input).innerText = price;
+}
 
-//delivery
+//calculating total price by this 
 
-document.getElementById('regular-delivery').addEventListener('click', function () {
+function totalPrice() {
 
-    document.getElementById('delivery-charge').innerText = 0;
+    const extraMemory = parseInt(document.getElementById('extra-memory').innerHTML);
+    const extraStorage = parseInt(document.getElementById('extra-storage').innerHTML);
+    const deliveryCharge = parseInt(document.getElementById('delivery-charge').innerHTML);
 
+    // console.log(extraMemory);
+    // console.log(extraStorage);
+    // console.log(deliveryCharge);
+
+    price = 1299 + extraMemory + extraStorage + deliveryCharge;
+
+    updatePrice('total-price', price);
+    updatePrice('again-total-price', price);
+
+    // Applying prom code
+    if (document.getElementById('cupon').value == 'stevekaku') {
+        applyPromo(price);
+    }
+}
+
+//Calcualting and updating the discounted price by this
+function applyPromo(price) {
+    const discountedPrice = price - (price * .20);
+    updatePrice('total-price', discountedPrice);
+    updatePrice('again-total-price', discountedPrice);
+}
+
+//checking and calling funtion for discount
+document.getElementById('promoApply').addEventListener('click', function (event) {
+    const cuponInput = document.getElementById('cupon').value;
+    if (cuponInput == 'stevekaku') {
+        promoApply.disabled = true;
+        totalPrice();
+    }
 })
 
-document.getElementById('fast-delivery').addEventListener('click', function () {
 
-
-    document.getElementById('delivery-charge').innerText = 20;
-
-})
-
-
-// const totalBalance(extraMemory, extraStorage, delivery){
-//     totalBalance = extraMemory + extraStorage + delivery;
-//     console.log(totalBalance);
-// }
