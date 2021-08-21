@@ -39,7 +39,6 @@ document.getElementById('hdd-1TB').addEventListener('click', function () {
 })
 
 
-
 //delivery
 
 document.getElementById('regular-delivery').addEventListener('click', function () {
@@ -56,7 +55,7 @@ document.getElementById('fast-delivery').addEventListener('click', function () {
 })
 
 
-// const totalBalance(extraMemory, extraStorage, delivery){
-//     totalBalance = extraMemory + extraStorage + delivery;
-//     console.log(totalBalance);
-// }
+const totalBalance(extraMemory, extraStorage, delivery){
+    totalBalance = extraMemory + extraStorage + delivery;
+    console.log(totalBalance);
+}
